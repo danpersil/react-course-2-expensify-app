@@ -17,4 +17,4 @@ const ExpenseListItem = ({ description, amount, createdAt, id }) =>
         </p>
     </div>
 );
-    export default ExpenseListItem;
+export default ExpenseListItem;
