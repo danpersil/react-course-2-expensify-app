@@ -23,3 +23,10 @@ promise.then((data) => {
 
 
 console.log('after');
+
+//model
+// ).then(() => {
+//     console.log("Data is saved!");
+// }).catch((e) => {
+//     console.log("This failed", e);
+// });
