@@ -1,5 +1,4 @@
 import * as firebase from 'firebase';
-import expenses from '../reducers/expenses';
 
 const firebaseConfig = {
     apiKey: "AIzaSyDA0vCJ4SSu4zyQ3N2BeiYUuGaM2ihu4JM",
@@ -14,6 +13,10 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+
+export { firebase, database as default };
+
+
 
 //TO work with arrays
 
@@ -49,27 +52,28 @@ const database = firebase.database();
 //     });
 
 //'child_removed'
-database.ref('expenses').on('child_removed',(snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-});
+// database.ref('expenses').on('child_removed',(snapshot) => {
+//     console.log(snapshot.key, snapshot.val());
+// });
 
-//'child_changed'
-database.ref('expenses').on('child_changed',(snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-});
+// //'child_changed'
+// database.ref('expenses').on('child_changed',(snapshot) => {
+//     console.log(snapshot.key, snapshot.val());
+// });
 
-//'child_changed'
-database.ref('expenses').on('child_added',(snapshot) => {
-    console.log(snapshot.key, snapshot.val());
-});
+// //'child_added'
+// database.ref('expenses').on('child_added',(snapshot) => {
+//     console.log(snapshot.key, snapshot.val());
+// });
 
-//Challenge
-database.ref('expenses').push({
-    description: 'Expense 2',
-    note: "",
-    amount: 25.5,
-    createdAt: 15000
-});
+
+// //Challenge
+// database.ref('expenses').push({
+//     description: 'Expense 2',
+//     note: "",
+//     amount: 25.5,
+//     createdAt: 15000
+// });
 
 // database.ref('expenses')
 //     .on('value',
