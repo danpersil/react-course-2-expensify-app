@@ -72,7 +72,7 @@ test('should add expense with defaults to database and store', (done)=> {
         note : '',
         amount : 0,
         createdAt : 0
-    } 
+    };
 
     store.dispatch(startAddExpense()).then(() => {
         const actions = store.getActions();
