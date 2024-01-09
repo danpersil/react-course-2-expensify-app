@@ -3,6 +3,7 @@ import configureStore from './store/configureStore';
 import AppRouter from "./routers/AppRouter";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
+import { startSetExpenses } from './actions/expenses';
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -18,4 +19,8 @@ const jsx = (
     </Provider>
 );
 
-createRoot(document.getElementById('app')).render(jsx);
+// createRoot(<p>Loading ...</p>).render(jsx);
+
+store.dispatch(startSetExpenses()).then(()=> {
+    createRoot(document.getElementById('app')).render(jsx);
+});
