@@ -1,6 +1,6 @@
 import React from "react";
 import configureStore from './store/configureStore';
-import AppRouter from "./routers/AppRouter";
+import AppRouter, { history } from "./routers/AppRouter";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { startSetExpenses } from './actions/expenses';
@@ -19,8 +19,6 @@ const jsx = (
     </Provider>
 );
 
-// createRoot(<p>Loading ...</p>).render(jsx);
-
 store.dispatch(startSetExpenses()).then(() => {
     createRoot(document.getElementById('app')).render(jsx);
 });
@@ -29,6 +27,6 @@ firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         console.log('log in');
     } else {
-        console.log('log out');
+        history.push('/');
     }
-})
+});
