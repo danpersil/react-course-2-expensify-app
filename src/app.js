@@ -4,6 +4,7 @@ import AppRouter, { history } from "./routers/AppRouter";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { startSetExpenses } from './actions/expenses';
+import { login, logout } from "./actions/auth";
 
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -13,20 +14,33 @@ import { firebase } from './firebase/firebase';
 
 const store = configureStore();
 
+let hasRendered = false;
+const renderApp = () => {
+    if (!hasRendered) {
+        createRoot(document.getElementById('app')).render(jsx);
+        hasRendered = true;
+    }
+};
+
 const jsx = (
     <Provider store={store}>
         <AppRouter />
     </Provider>
 );
 
-store.dispatch(startSetExpenses()).then(() => {
-    createRoot(document.getElementById('app')).render(jsx);
-});
-
 firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-        console.log('log in');
+        store.dispatch(login(user.uid));
+        console.log('uid', user.uid);
+        store.dispatch(startSetExpenses()).then(() => {
+            renderApp();
+            if(history.location.pathname === '/'){
+                history.push('/dashboard');
+            }
+        });
     } else {
+        store.dispatch(logout());
+        renderApp();
         history.push('/');
     }
 });
