@@ -2,11 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-process.env.NODE_ENV = process.env.NODE_ENV  || 'development';
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 if (process.env.NODE_ENV === 'test') {
     require('dotenv').config({ path: 'env.test' });
-} else if(process.env.NODE_ENV === 'development') {
+} else if (process.env.NODE_ENV === 'development') {
     require('dotenv').config({ path: '.env.development' });
 }
 
@@ -16,7 +16,7 @@ module.exports = (env) => {
 
     return {
         mode: isProduction ? 'production' : 'development',
-        entry: './src/app.js',
+        entry: ['babel-polyfill', './src/app.js'],
         output: {
             path: path.join(__dirname, 'public', 'dist'),
             filename: 'bundle.js'
